@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
 
 router.post("/", isAuthenticated, async (req, res) => {
   try {
-    const { title, ingredients, preparationSteps, categories, image } =
+    const { title, ingredients, preparationSteps, categories, image, idUser } =
       req.body;
 
     const newRecipe = new Recipe({
       title,
       ingredients,
       preparationSteps,
-      author: req.payload._id,
+      author: idUser,
       categories,
       image,
     });
@@ -55,7 +55,7 @@ router.get("/:recipeId", async (req, res) => {
   }
 });
 
-router.put("/:recipeId", async (req, res) => {
+router.put("/:recipeId", isAuthenticated, async (req, res) => {
   try {
     const recipeId = req.params.recipeId;
     const updateData = req.body;
@@ -75,7 +75,7 @@ router.put("/:recipeId", async (req, res) => {
   }
 });
 
-router.delete("/:recipeId", async (req, res) => {
+router.delete("/:recipeId", isAuthenticated, async (req, res) => {
   try {
     const recipeId = req.params.recipeId;
 

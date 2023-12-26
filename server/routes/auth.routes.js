@@ -32,16 +32,6 @@ router.post("/register", (req, res, next) => {
     return;
   }
 
-  // This regular expression checks password for special characters and minimum length
-  const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!passwordRegex.test(password)) {
-    res.status(400).json({
-      message:
-        "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.",
-    });
-    return;
-  }
-
   // Check the users collection if a user with the same email already exists
   User.findOne({ email })
     .then((foundUser) => {
@@ -109,7 +99,7 @@ router.post("/login", (req, res, next) => {
         });
         // req.user = payload;
         // Send the token as the response
-        res.status(200).json({ authToken: authToken });
+        res.status(200).json({ authToken: authToken, email, _id });
       } else {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
