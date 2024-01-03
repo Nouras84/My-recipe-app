@@ -7,8 +7,11 @@ export default function Logout() {
   const navigate = useNavigate();
   useEffect(() => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("emailAuthUser");
+    localStorage.removeItem("AuthUserId");
     setUser(null);
     navigate("/login");
+    location.reload();
   }, [navigate]);
   return <div>loading...</div>;
 }

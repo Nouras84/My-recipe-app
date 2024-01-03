@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function CreateRecipe() {
+function EditRecipe() {
   const navigate = useNavigate();
   const [title, settitle] = useState("");
   const [ingredients, setingredients] = useState("");
@@ -14,9 +14,11 @@ function CreateRecipe() {
     e.preventDefault();
     const idUser = localStorage.getItem("AuthUserId");
 
+    const recipe = JSON.parse(localStorage.getItem("recipeEdit"));
+
     axios
-      .post(
-        "https://recipe-app-0ddk.onrender.com/recipe",
+      .put(
+        "https://recipe-app-0ddk.onrender.com/recipe/" + recipe._id,
         {
           title,
           ingredients,
@@ -41,8 +43,18 @@ function CreateRecipe() {
   useEffect(() => {
     const idUser = localStorage.getItem("AuthUserId");
 
+    const recipe = JSON.parse(localStorage.getItem("recipeEdit"));
+
     if (!idUser) {
       navigate("/login");
+    }
+
+    if (recipe) {
+      settitle(recipe.title);
+      setingredients(recipe.ingredients);
+      setpreparationSteps(recipe.preparationSteps);
+      setcategories(recipe?.categories);
+      setimage(recipe.image);
     }
   }, []);
 
@@ -57,7 +69,7 @@ function CreateRecipe() {
         }}
       >
         {" "}
-        Add new Recipe{" "}
+        Edit Recipe{" "}
       </h2>
       <form
         onSubmit={handleSubmit}
@@ -113,11 +125,11 @@ function CreateRecipe() {
           type="submit"
         >
           {" "}
-          create{" "}
+          Edit{" "}
         </button>
       </form>
     </>
   );
 }
 
-export default CreateRecipe;
+export default EditRecipe;
