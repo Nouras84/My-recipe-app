@@ -32,23 +32,17 @@
 
 // module.exports = app;
 
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
+// Gets access to environment variables/settings
 require("dotenv").config();
 
-// ℹ️ Connects to the database
-require("./db");
-
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
+// Handles http requests (express is a Node.js framework)
 const express = require("express");
-
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
+// This function is getting exported from the config folder. It runs database connection and middleware setup
 require("./config")(app);
 
-// 👇 Start handling routes here
+// Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
@@ -61,7 +55,7 @@ app.use("/recipe", recipeRoutes);
 const categoryRoutes = require("./routes/category.routes");
 app.use("/category", categoryRoutes);
 
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
+// Handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 module.exports = app;
