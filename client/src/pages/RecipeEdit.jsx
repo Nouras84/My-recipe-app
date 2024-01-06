@@ -18,7 +18,7 @@ function EditRecipe() {
 
     axios
       .put(
-        "https://recipe-app-0ddk.onrender.com/recipe/" + recipe._id,
+        "http://localhost:4001/recipe/" + recipe._id,
         {
           title,
           ingredients,
@@ -29,9 +29,7 @@ function EditRecipe() {
         },
         {
           headers: {
-            Authorization:
-              "Bearer " +
-              "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NDQyMzA0NSwiaWF0IjoxNjg0NDIzMDQ1fQ.3GDYc4YE0FhkUqz1vEaMAfASfbJbJll76yDt-h93fNo",
+            Authorization: "Bearer " + "y0uRt0k3N$eCr3T",
           },
         }
       )

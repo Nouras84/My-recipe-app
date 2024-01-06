@@ -28,31 +28,27 @@ export default function Dashboard() {
   const idUser = localStorage.getItem("AuthUserId");
 
   const getRecipes = async () => {
-    await axios
-      .get("https://recipe-app-0ddk.onrender.com/recipe")
-      .then((response) => {
-        const filterResult = response.data.filter(
-          (item) => item.author === idUser
-        );
-        setRecipes(filterResult);
+    await axios.get("http://localhost:4001/recipe").then((response) => {
+      const filterResult = response.data.filter(
+        (item) => item.author === idUser
+      );
+      setRecipes(filterResult);
 
-        const itemsCategories = filterResult.flatMap(
-          (objeto) => objeto.categories
-        );
+      const itemsCategories = filterResult.flatMap(
+        (objeto) => objeto.categories
+      );
 
-        const itemsVerify = new Set(itemsCategories);
+      const itemsVerify = new Set(itemsCategories);
 
-        setCategories([...itemsVerify]);
-      });
+      setCategories([...itemsVerify]);
+    });
   };
 
   const removeRecipes = async (id) => {
     await axios
-      .delete("https://recipe-app-0ddk.onrender.com/recipe/" + id, {
+      .delete("http://localhost:4001/recipe/" + id, {
         headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NDQyMzA0NSwiaWF0IjoxNjg0NDIzMDQ1fQ.3GDYc4YE0FhkUqz1vEaMAfASfbJbJll76yDt-h93fNo",
+          Authorization: "Bearer " + "y0uRt0k3N$eCr3T",
         },
       })
       .then(() => {
