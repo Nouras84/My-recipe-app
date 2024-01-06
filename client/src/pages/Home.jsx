@@ -73,7 +73,7 @@ export default function Home() {
         onChange={(event) => setCategory(event.target.value)}
         style={{ marginTop: "32px", width: isMobileOrTablet ? "95%" : "40%" }}
       >
-        <option value="">Open this filter recipes for category</option>
+        <option value="">Recipe Filter</option>
         {categories &&
           categories?.map((item, key) => {
             return (
