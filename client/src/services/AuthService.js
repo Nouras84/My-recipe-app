@@ -29,14 +29,14 @@ import axios from "axios";
 
 class AuthService {
   login = (email, password) => {
-    return axios.post(`https://recipe-app-0ddk.onrender.com/auth/login`, {
+    return axios.post(`http://localhost:4001/auth/login`, {
       email,
       password,
     });
   };
 
   register = (username, email, password) => {
-    return axios.post(`https://recipe-app-0ddk.onrender.com/auth/register`, {
+    return axios.post(`http://localhost:4001/auth/register`, {
       username,
       email,
       password,

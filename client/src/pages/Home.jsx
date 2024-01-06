@@ -24,27 +24,23 @@ export default function Home() {
   const idUser = localStorage.getItem("AuthUserId");
 
   const getRecipes = async () => {
-    await axios
-      .get("https://recipe-app-0ddk.onrender.com/recipe")
-      .then((response) => {
-        setRecipes(response.data);
-        const itemsCategories = response.data.flatMap(
-          (objeto) => objeto.categories
-        );
+    await axios.get("http://localhost:4001/recipe").then((response) => {
+      setRecipes(response.data);
+      const itemsCategories = response.data.flatMap(
+        (objeto) => objeto.categories
+      );
 
-        const itemsVerify = new Set(itemsCategories);
+      const itemsVerify = new Set(itemsCategories);
 
-        setCategories([...itemsVerify]);
-      });
+      setCategories([...itemsVerify]);
+    });
   };
 
   const removeRecipes = async (id) => {
     await axios
-      .delete("https://recipe-app-0ddk.onrender.com/recipe/" + id, {
+      .delete("http://localhost:4001/recipe/" + id, {
         headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NDQyMzA0NSwiaWF0IjoxNjg0NDIzMDQ1fQ.3GDYc4YE0FhkUqz1vEaMAfASfbJbJll76yDt-h93fNo",
+          Authorization: "Bearer " + "y0uRt0k3N$eCr3T",
         },
       })
       .then(() => {
